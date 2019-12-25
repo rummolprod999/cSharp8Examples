@@ -1,9 +1,17 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace cSharp8Examples
 {
+    
+    interface IA
+    {
+        void M() { Console.WriteLine("IA.M"); }
+    }
+    class C : IA { } 
+    
     class Program
     {
         static void Main(string[] args)
@@ -12,6 +20,7 @@ namespace cSharp8Examples
             Patterns();
             SpanTest();
             AsyncStream().GetAwaiter().GetResult();
+            DefaultInterface();
         }
 
         static void Indexes()
@@ -78,6 +87,12 @@ namespace cSharp8Examples
                 await Task.Delay(100);
                 yield return i;
             }
+        }
+
+        static void DefaultInterface()
+        {
+            IA i = new C();
+            i.M();
         }
     }
 }
